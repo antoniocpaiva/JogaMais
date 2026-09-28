@@ -1,0 +1,2 @@
+-- O seed permanece intencionalmente vazio.
+-- Usuários locais são criados pelos testes para não versionar credenciais ou dados pessoais.

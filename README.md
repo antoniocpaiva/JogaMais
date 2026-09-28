@@ -1,78 +1,76 @@
-# JogaMais — M1 demonstração local
+# JogaMais — M1 executável e fundação M2
 
-Primeira entrega executável do JogaMais, limitada às histórias **F1-01 a F1-06**. O projeto demonstra o percurso responsivo:
+O repositório contém a demonstração responsiva do M1 e a fundação segura do M2:
 
-**Turmas → Sub-11 → Atleta Demo 01 → avaliação de demonstração → perfil atualizado**
+- M1: **Turmas → Sub-11 → Atleta Demo 01 → avaliação demonstrativa → perfil atualizado**;
+- M2: PostgreSQL/Supabase, login real, memberships por organização, RLS multi-tenant, convites e cadastros essenciais da coordenação.
 
-> Esta entrega não é um sistema pronto para dados reais. Não possui autenticação, servidor, banco, autorização, upload, portal familiar ou publicação real.
+## Preview rápido (sem banco)
 
-## Requisitos e execução
-
-- Node.js 22.6 ou superior (validado com Node 24; os testes usam remoção nativa de tipos TypeScript)
-- npm
+Requer Node.js 22.6 ou superior e npm.
 
 ```bash
 npm install
 npm run dev
 ```
 
-Abra [http://localhost:3000](http://localhost:3000). Para uma checagem completa:
+Abra [http://localhost:3000](http://localhost:3000). As rotas do M1 continuam disponíveis sem credenciais. A página `/entrar` mostra as instruções de configuração enquanto o Supabase não estiver configurado.
+
+## Ambiente M2 local
+
+O ambiente completo requer Docker Desktop (ou runtime compatível com Docker) para executar o Supabase local.
 
 ```bash
-npm run check
+cp .env.example .env.local
+npm run supabase:start
+npm run db:reset
+npm run db:test
+npm run dev
 ```
 
-Comandos disponíveis:
+Após `supabase:start`, substitua em `.env.local` a URL e a chave publicável pelos valores exibidos pelo CLI. Nunca versione `.env.local`, chaves secretas ou a `service_role`.
+
+Para um projeto hospedado, crie o projeto no Supabase, aplique as migrações com o CLI e configure:
+
+```text
+NEXT_PUBLIC_SUPABASE_URL=...
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=...
+```
+
+O primeiro usuário autenticado acessa `/app/configuracoes` e cria a organização. A coordenação então pode:
+
+1. gerar convites de técnico ou responsável;
+2. criar temporada e turma;
+3. cadastrar atleta já vinculado a uma turma;
+4. atribuir técnico à turma;
+5. vincular responsável ao atleta;
+6. revogar atribuições e vínculos com efeito imediato.
+
+## Verificação
 
 | Comando | Finalidade |
 |---|---|
-| `npm run dev` | Inicia o ambiente local de desenvolvimento |
-| `npm run lint` | Executa as regras de qualidade do código |
-| `npm run test` | Testa as regras de validação da avaliação |
-| `npm run build` | Gera a compilação de produção |
-| `npm run start` | Serve a compilação gerada |
-| `npm run check` | Executa lint, testes e build em sequência |
+| `npm run check` | lint, testes de domínio e build de produção |
+| `npm run supabase:start` | inicia o stack Supabase local |
+| `npm run db:reset` | reaplica migrações e seed |
+| `npm run db:test` | executa testes pgTAP de constraints e RLS |
+| `npm run supabase:stop` | encerra o stack local |
 
-## Como conferir o percurso M1
+O CI executa duas trilhas independentes: qualidade da aplicação e testes reais das migrações/RLS em Supabase local.
 
-1. Em **Turmas**, abra a turma Sub-11.
-2. Na lista da turma, abra o perfil de **Atleta Demo 01**.
-3. Confirme o estado vazio e inicie a avaliação.
-4. Preencha os quatro critérios exemplificativos. Cada um aceita nível de 1 a 5 ou “não observado”; nesse último caso, a justificativa é obrigatória.
-5. Use **Salvar rascunho**, navegue para outra tela e retorne para conferir a recuperação local.
-6. Inclua o comentário final e use **Concluir demonstração**.
-7. Abra o perfil atualizado. Ele mostra os critérios individualmente, sem média, percentual de desempenho ou ranking.
-8. Use **Limpar dados da demo** no fim do perfil para retornar ao estado inicial.
+## Segurança do M2
 
-Para revisar o celular, use uma largura de aproximadamente 390 px. A navegação migra para a barra inferior, os controles de nota mantêm áreas de toque amplas e as ações ficam empilhadas. Em desktop, a navegação permanece na lateral.
+- O servidor verifica a sessão com `getClaims()`; não usa dados de sessão não verificados para autorizar.
+- Server Actions são tratadas como endpoints públicos: autenticação, papel e entrada são verificados em cada mutação.
+- RLS está habilitado em todas as tabelas públicas e `anon` não recebe privilégios de tabela.
+- Chaves estrangeiras compostas impedem vínculos entre organizações.
+- Técnico sem atribuição não vê atleta; responsável sem vínculo não vê atleta; responsável nunca vê rascunho.
+- Convites expiram em sete dias, são vinculados ao e-mail autenticado e armazenam apenas o hash do token.
 
-## Dados e arquitetura
+Detalhes e matriz de papéis: [`docs/M2_ARQUITETURA.md`](docs/M2_ARQUITETURA.md).
 
-- `src/domain/` contém tipos e regras puras de validação.
-- `src/data/fixtures.ts` contém somente a turma e os critérios fictícios da demonstração.
-- `src/data/demo-repository.ts` implementa a interface substituível de acesso a dados.
-- `src/components/demo-provider.tsx` conecta a interface ao repositório temporário.
-- `src/app/` contém as rotas do App Router.
+## Dados demonstrativos e limites
 
-Todos os atletas do código são fixtures genéricas identificadas como “Atleta Demo”. O código não inclui fotos, datas de nascimento, posições, notas, históricos ou escolas reais. A avaliação começa vazia e só é criada pela pessoa que percorre a demonstração.
+Todos os atletas versionados são fixtures genéricas “Atleta Demo”. Não há fotos, datas de nascimento, históricos ou escolas reais no repositório. O rascunho M1 continua em `localStorage` e não representa publicação real.
 
-## Limites deliberados do M1
-
-- O rascunho usa `localStorage`, não é criptografado e existe apenas no navegador atual.
-- “Concluir” atualiza a demonstração local; não significa publicar uma avaliação real.
-- Não há sincronização entre dispositivos, controle de concorrência ou recuperação após limpar os dados do navegador.
-- Os critérios e descritores são exemplos de produto e precisam de revisão por profissional de formação antes do piloto.
-- Existe apenas um ciclo demonstrativo; portanto, o perfil exibe estado sem histórico comparável.
-- Erros de rota e de renderização possuem estados próprios, mas não há observabilidade de servidor.
-
-## Escolhas reversíveis
-
-- Next.js 16, React 19, TypeScript e Tailwind CSS 4 compõem a base inicial.
-- O M1 usa rotas reais para Turmas, Atletas, Perfil e Avaliação; a navegação pode evoluir sem alterar o domínio.
-- O repositório local implementa o mesmo limite esperado para uma futura API e pode ser substituído no M2.
-- Um critério por pilar reduz o esforço do teste de experiência; o catálogo completo pertence ao núcleo real e depende de revisão esportiva.
-- A conclusão direta foi adotada para a demonstração, sem simular aprovação ou publicação.
-
-## Pendências para M2
-
-M2 deve introduzir PostgreSQL e migrações, identidade real, memberships por organização, isolamento entre escolinhas, autorização no servidor e no banco, cadastros essenciais e testes negativos de acesso. Dados reais não devem ser usados antes dessas proteções e da revisão de privacidade prevista no PRD.
+O catálogo metodológico real, workflow completo de revisão/publicação e metas pertencem ao M3. Uploads, notificações, auditoria automática e hardening operacional pertencem aos marcos seguintes.

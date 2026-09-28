@@ -5,11 +5,11 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "JogaMais · Demonstração local",
+    default: "JogaMais · Formação com clareza",
     template: "%s · JogaMais",
   },
   description:
-    "Demonstração local da experiência de acompanhamento esportivo JogaMais.",
+    "Experiência de acompanhamento esportivo JogaMais.",
 };
 
 export const viewport: Viewport = {
