@@ -9,7 +9,7 @@
 
 JogaMais é uma plataforma de acompanhamento do desenvolvimento esportivo de crianças e adolescentes em escolinhas de futebol. O treinador registra avaliações periódicas com critérios descritos, define metas e acompanha a evolução. O coordenador acompanha a operação. A família visualiza somente os dados de seus filhos, em linguagem clara e sem ranking entre crianças.
 
-O primeiro marco funcional é cadastrar **Felipe Paiva** em uma turma Sub-11 de demonstração, registrar uma avaliação, publicá-la e visualizar seu histórico e suas metas nos perfis autorizados. O nome e a foto fornecidos pelo responsável podem ilustrar o protótipo privado. Seu uso em produção depende das permissões e do registro de autorização apropriados; a imagem não deve compor dados de demonstração públicos, repositório aberto ou material comercial.
+O primeiro marco funcional é cadastrar **Atleta Demo 01** em uma turma Sub-11 de demonstração, registrar uma avaliação, publicá-la e visualizar seu histórico e suas metas nos perfis autorizados. Este perfil é uma fixture inteiramente fictícia. Nomes e fotografias reais não devem compor demonstrações públicas, repositórios abertos ou material comercial; qualquer uso privado ou em produção depende das permissões e do registro de autorização apropriados.
 
 O MVP deve funcionar em navegador no computador e celular, com interface responsiva e instalação PWA quando tecnicamente disponível. A primeira implantação atende uma escolinha piloto, mas o modelo de dados e a autorização devem isolar múltiplas organizações desde o começo.
 
@@ -73,7 +73,7 @@ Autorização é aplicada no servidor e nas regras de banco/armazenamento. Ocult
 
 **Implantação:** administrador cria escolinha → convida coordenador → coordenador cria temporada, turmas e ciclo → convida treinadores → cadastra atletas e responsáveis → atribui turmas.
 
-**Treinador:** entra em Minhas turmas → escolhe turma e ciclo → vê atletas pendentes → abre Felipe Paiva → preenche critérios aplicáveis → salva rascunho → define até três metas → revisa → publica → avança ao próximo atleta. Mudanças posteriores ficam auditadas e sujeitas à política de reabertura.
+**Treinador:** entra em Minhas turmas → escolhe turma e ciclo → vê atletas pendentes → abre Atleta Demo 01 → preenche critérios aplicáveis → salva rascunho → define até três metas → revisa → publica → avança ao próximo atleta. Mudanças posteriores ficam auditadas e sujeitas à política de reabertura.
 
 **Coordenador:** consulta progresso do ciclo por turma → filtra pendentes → acompanha publicação e corrige vínculos/configuração → lê resultados individuais quando necessário.
 
@@ -128,7 +128,7 @@ Rascunhos podem mudar livremente pelo autor autorizado. Após publicação, corr
 | 10 Portal da família | Seletor de filho, resumo, histórico, metas | Aguardando publicação |
 | 11 Configurações | Organização, papéis, vínculos, temporadas/ciclos | Permissão insuficiente |
 
-No celular, o treinador deve chegar à avaliação em poucos toques, usar botões com área de toque confortável e conservar rascunho ao mudar de seção. Se a conexão cair, a interface mostra claramente o estado de salvamento; sincronização offline completa não integra o MVP. O design usa a identidade visual preliminar JogaMais; cores, tipografia e marca final permanecem ajustáveis. **Felipe Paiva** é o perfil nominal do protótipo privado, sem inventar notas, posição ou resultados reais.
+No celular, o treinador deve chegar à avaliação em poucos toques, usar botões com área de toque confortável e conservar rascunho ao mudar de seção. Se a conexão cair, a interface mostra claramente o estado de salvamento; sincronização offline completa não integra o MVP. O design usa a identidade visual preliminar JogaMais; cores, tipografia e marca final permanecem ajustáveis. **Atleta Demo 01** é o perfil inteiramente fictício da demonstração pública, sem notas, posição ou resultados predefinidos.
 
 ## 9. Modelo de dados lógico
 
@@ -182,7 +182,7 @@ Medir: proporção de atletas elegíveis com avaliação publicada por ciclo; te
 4. **Valor visível:** metas, perfil, evolução, painel do coordenador e portal da família.
 5. **Piloto:** testes de autorização e fluxos ponta a ponta, acessibilidade essencial, revisão de privacidade, backup/restauração e validação com usuários reais.
 
-**Cenário de aceite ponta a ponta:** coordenador cria Sub-11 e vincula treinador e Felipe Paiva; responsável é convidado; treinador publica avaliação com critérios aplicáveis e meta; perfil e histórico refletem a publicação; responsável de Felipe a visualiza; responsável de outro atleta e treinador de outra turma não a visualizam; segundo ciclo altera um critério e mostra a diferença corretamente.
+**Cenário de aceite ponta a ponta:** coordenador cria Sub-11 e vincula treinador e Atleta Demo 01; responsável fictício é convidado; treinador publica avaliação com critérios aplicáveis e meta; perfil e histórico refletem a publicação; responsável vinculado a Atleta Demo 01 a visualiza; responsável de outro atleta e treinador de outra turma não a visualizam; segundo ciclo altera um critério e mostra a diferença corretamente.
 
 ## 14. Decisões pendentes antes de desenvolvimento ou piloto
 
@@ -191,7 +191,7 @@ Medir: proporção de atletas elegíveis com avaliação publicada por ciclo; te
 | Identidade e nome | JogaMais é nome de trabalho; verificar marca, domínio e conflitos antes de uso comercial. |
 | Metodologia | Revisar âncoras, conjuntos obrigatórios e critérios por idade/posição com profissional de formação. |
 | Operação piloto | Identificar escolinha, coordenador, turmas, quantidade de atletas e quem administrará convites. |
-| Uso da imagem de Felipe | Confirmar escopo de autorização para protótipo privado e eventual uso posterior. |
+| Uso de imagens reais | Manter imagens fora da demonstração pública e confirmar autorização, finalidade e escopo antes de qualquer uso privado ou posterior. |
 | Fornecedores | Escolher hospedagem, autenticação, banco e storage após estimar custos e requisitos de dados. |
 | Publicação | Definir se treinador publica diretamente ou coordenador aprova por escolinha; MVP propõe publicação direta com reabertura auditada. |
 | Retenção e privacidade | Formalizar bases, avisos, consentimentos aplicáveis, prazo de retenção e exclusão antes de dados reais. |

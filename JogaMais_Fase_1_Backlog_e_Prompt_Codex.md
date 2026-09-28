@@ -8,7 +8,7 @@
 
 Abra um repositório privado no Codex e forneça este arquivo e o PRD. Execute primeiro apenas M1. Revise a experiência no computador e no celular antes de iniciar M2.
 
-A foto do Felipe enviada na conversa não deve entrar no repositório nem em demonstração pública. O nome Felipe Paiva pode identificar o perfil privado do protótipo, sem inventar data de nascimento, posição, notas ou desempenho. Use avatar neutro no código.
+Fotografias e nomes reais de crianças não devem entrar no repositório nem em demonstração pública. Use somente aliases explicitamente fictícios, sem inventar data de nascimento, posição, notas ou desempenho, e mantenha um avatar neutro no código.
 
 ## Marcos
 
@@ -31,7 +31,7 @@ O **primeiro prompt executa somente M1**. Não apresente M1 como sistema pronto 
 
 **F1-03 Isolar dados fictícios.** Tipos, fixtures fictícias e uma interface de acesso a dados substituível por API. Aceite: demo explicitamente rotulada, sem dados reais; qualquer persistência local descrita como temporária. Depende de F1-01.
 
-**F1-04 Mostrar turma e perfil.** Turma Sub-11 de demonstração, lista de atletas e perfil selecionável. Aceite: perfil sem avaliação mostra estado vazio; nada afirma idade, posição ou desempenho não informados sobre Felipe Paiva. Depende de F1-02 e F1-03.
+**F1-04 Mostrar turma e perfil.** Turma Sub-11 de demonstração, lista de atletas e perfil selecionável. Aceite: perfil sem avaliação mostra estado vazio; todas as identidades são fixtures fictícias e nada afirma idade, posição ou desempenho predefinido. Depende de F1-02 e F1-03.
 
 **F1-05 Avaliar na demonstração.** Critérios exemplificativos nos quatro pilares; escala 1–5 com descritores, não observado com justificativa; rascunho e conclusão da demo; perfil atualizado. Aceite: validação dos campos exigidos, fluxo utilizável no celular; nenhuma publicação real ou percentual de evolução ordinal. Depende de F1-04.
 
@@ -69,7 +69,7 @@ Copie o texto a seguir e anexe este backlog e o PRD ao projeto:
 >
 > 1. Inspecione o repositório. Preserve o código útil se já existir. Se estiver vazio, crie uma aplicação Next.js com TypeScript e interface responsiva. Registre qualquer conflito com o PRD.
 > 2. Crie navegação JogaMais, lista de turmas, turma Sub-11 de demonstração, lista de atletas, perfil e formulário de avaliação, com visual consistente em celular e desktop e controles acessíveis.
-> 3. Use somente fixtures fictícias, claramente identificadas. Pode mostrar o nome Felipe Paiva em um perfil privado, mas não invente nascimento, posição, notas, histórico ou escola real. Não coloque a fotografia dele no repositório; use avatar neutro. Uma avaliação demo deve ser criada pelo usuário durante o teste.
+> 3. Use somente fixtures fictícias, claramente identificadas. Use “Atleta Demo 01” no perfil principal e não invente nascimento, posição, notas, histórico ou escola real. Não coloque fotografias reais no repositório; use avatar neutro. Uma avaliação demo deve ser criada pelo usuário durante o teste.
 > 4. Agrupe critérios exemplificativos em técnico, tático, físico e comportamental. Mostre escala de 1 a 5 com descritores e opção não observado com justificativa. Permita salvar rascunho e concluir avaliação de demonstração, atualizando o perfil. Se usar armazenamento local, identifique seus limites na interface e no README. Não chame isso de publicação real.
 > 5. Não calcule percentuais a partir das notas 1–5. Sem dois ciclos comparáveis, mostre estado sem histórico comparável. Não mostre ranking.
 > 6. Separe tipos, fixtures e acesso a dados da interface para permitir substituição posterior por API. Documente instalação, execução e limites da demo.
