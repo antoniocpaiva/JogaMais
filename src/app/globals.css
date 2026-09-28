@@ -34,7 +34,7 @@ body {
 }
 
 a { color: inherit; text-decoration: none; }
-button, input, textarea { font: inherit; }
+button, input, textarea, select { font: inherit; }
 button, a { -webkit-tap-highlight-color: transparent; }
 button { color: inherit; }
 
@@ -82,6 +82,34 @@ button { color: inherit; }
 .sidebar-note span { color: var(--ink-soft); font-size: 11px; line-height: 1.45; }
 .content { min-width: 0; padding: 48px clamp(28px, 5vw, 72px) 80px; }
 .mobile-nav { display: none; }
+
+.auth-content { min-height: 100vh; padding: 32px 18px; display: grid; place-items: center; background: var(--green); }
+.auth-wrap { width: min(100%, 480px); }
+.auth-card { padding: clamp(28px, 6vw, 48px); border-radius: 26px; background: var(--surface); box-shadow: 0 28px 90px rgba(7, 25, 19, .3); }
+.auth-card h1, .m2-narrow h1 { margin: 9px 0; font-family: Georgia, "Times New Roman", serif; font-size: clamp(36px, 8vw, 52px); font-weight: 500; line-height: 1; letter-spacing: -.045em; }
+.auth-card > p, .m2-card > p, .m2-section > div > p { color: var(--ink-soft); line-height: 1.6; }
+.m2-form { margin: 26px 0 20px; display: grid; gap: 16px; }
+.m2-form label, .m2-inline-form label { display: grid; gap: 7px; color: var(--ink-soft); font-size: 12px; font-weight: 700; }
+.m2-form input, .m2-inline-form input, .m2-inline-form select { min-height: 46px; padding: 0 13px; color: var(--ink); border: 1px solid var(--line); border-radius: 11px; background: white; }
+.m2-form input:focus, .m2-inline-form input:focus, .m2-inline-form select:focus { border-color: #8aa936; outline: 3px solid rgba(148, 182, 45, .18); }
+.form-error { margin: 0; color: var(--danger); font-size: 13px; }
+.setup-callout { margin: 25px 0 20px; padding: 17px; border: 1px solid #ead8ac; border-radius: 14px; background: #fffaf0; }
+.setup-callout p { margin: 6px 0 0; color: var(--ink-soft); line-height: 1.55; }
+.setup-callout code { padding: 2px 5px; border-radius: 5px; background: #f1eadc; }
+.invite-url { overflow-wrap: anywhere; color: var(--green) !important; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; }
+.text-link { color: var(--green-2); font-weight: 750; text-decoration: underline; text-underline-offset: 3px; }
+.m2-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.m2-card, .m2-section { padding: 25px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); box-shadow: 0 12px 38px rgba(23,54,45,.055); }
+.m2-card { display: grid; justify-items: start; gap: 12px; }
+.m2-card h2, .m2-section h2 { margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: 29px; font-weight: 500; letter-spacing: -.03em; }
+.m2-card > p { margin: 0 0 8px; }
+.m2-narrow { max-width: 620px; margin: 0 auto; }
+.m2-section { display: grid; gap: 20px; }
+.m2-section > div > p { margin: 5px 0 0; }
+.m2-inline-form { display: grid; grid-template-columns: repeat(3, minmax(140px, 1fr)) auto; align-items: end; gap: 12px; }
+.m2-hint { margin: 0; padding: 14px 16px; color: var(--ink-soft); border: 1px dashed #cbd0c3; border-radius: 12px; background: rgba(255,255,255,.45); }
+.m2-revoke { padding: 12px 0 0; border-top: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; gap: 14px; }
+.m2-revoke span { color: var(--ink-soft); font-size: 12px; overflow-wrap: anywhere; }
 
 .page-stack { max-width: 1080px; margin: 0 auto; display: grid; gap: 30px; }
 .page-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 28px; }
@@ -296,6 +324,7 @@ a.profile-card:hover { border-color: #b8c79c; box-shadow: 0 8px 28px rgba(23,54,
   .mobile-nav .nav-link svg { width: 18px; height: 18px; }
   .mobile-nav .nav-link-active { color: var(--green); background: var(--lime); box-shadow: none; }
   .result-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .m2-inline-form { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 @media (max-width: 650px) {
@@ -352,6 +381,9 @@ a.profile-card:hover { border-color: #b8c79c; box-shadow: 0 8px 28px rgba(23,54,
   .success-card h1 { font-size: 37px; }
   .success-actions { width: 100%; flex-direction: column; }
   .success-actions .button { width: 100%; }
+  .m2-grid, .m2-inline-form { grid-template-columns: 1fr; }
+  .m2-card, .m2-section { padding: 19px; }
+  .m2-revoke { align-items: stretch; flex-direction: column; }
 }
 
 @media (prefers-reduced-motion: reduce) {
